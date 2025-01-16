@@ -3,7 +3,16 @@
 # Adjust module name/version as needed based on OSCAR's documentation
 module load miniconda3/23.11.0s
 
-# Source the conda.sh script so 'conda' commands are recognized
+# Add Miniconda to PATH and source conda.sh in ~/.bashrc if not already added
+if ! grep -q "/oscar/runtime/software/external/miniconda3/23.11.0/bin" ~/.bashrc; then
+    echo "export PATH=/oscar/runtime/software/external/miniconda3/23.11.0/bin:\$PATH" >> ~/.bashrc
+    echo "source /oscar/runtime/software/external/miniconda3/23.11.0/etc/profile.d/conda.sh" >> ~/.bashrc
+    echo "Added Miniconda paths to ~/.bashrc. Please run 'source ~/.bashrc' or restart your shell to apply changes."
+else
+    echo "Miniconda paths are already configured in ~/.bashrc."
+fi
+
+# Source the conda.sh script (needed for the current session)
 source /oscar/runtime/software/external/miniconda3/23.11.0/etc/profile.d/conda.sh
 
 # Name of the environment
