@@ -1,7 +1,7 @@
 name: csci1470
 
 dependencies:
-  - python=3.10
+  - python=3.12
   - pip
   - jupyter
   - jupyterlab
@@ -11,6 +11,7 @@ dependencies:
   - pandas
   - pandas-datareader
   - matplotlib=3.5
+  - wandb
   - numpy
   - pillow
   - tqdm
@@ -20,7 +21,7 @@ dependencies:
   - pytest
   - pip:
       - setuptools>=41.2
-      - tensorflow==2.11
+      - tensorflow==2.15.0
       - gradescope-utils>=0.3.1
       - imageio==2.9
       - kaggle
