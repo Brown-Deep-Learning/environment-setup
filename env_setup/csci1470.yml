@@ -11,7 +11,6 @@ dependencies:
   - pandas
   - pandas-datareader
   - matplotlib=3.5
-  - wandb
   - numpy
   - pillow
   - tqdm
@@ -26,3 +25,4 @@ dependencies:
       - imageio==2.9
       - kaggle
       - gym
+      - wandb
