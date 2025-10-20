@@ -18,23 +18,28 @@ source /oscar/runtime/software/external/miniconda3/23.11.0/etc/profile.d/conda.s
 # Name of the environment
 ENV_NAME="csci1470"
 
-# Remove existing environment if it exists
-if conda env list | grep -q "^$ENV_NAME "; then
-    yes | conda env remove -n "$ENV_NAME" -y 2>/dev/null || true
-    echo "Removed existing environment '$ENV_NAME'"
+# Force remove the environment directory if it exists
+if [ -d "$HOME/.conda/envs/$ENV_NAME" ]; then
+    echo "Removing existing environment directory..."
+    rm -rf "$HOME/.conda/envs/$ENV_NAME"
 fi
 
-# Create the new environment from the YML file.
-# Note: Make sure you are in the correct directory so that
-# 'env_setup/Other/csci1470.yml' can be found.
+# Also remove any existing Jupyter kernel
+if [ -d "$HOME/.local/share/jupyter/kernels/$ENV_NAME" ]; then
+    echo "Removing existing Jupyter kernel..."
+    rm -rf "$HOME/.local/share/jupyter/kernels/$ENV_NAME"
+fi
+
+# Create the new environment from the YML file
 conda env create -n "$ENV_NAME" -f env_setup/csci1470.yml
 
 # Activate the environment
 conda activate "$ENV_NAME"
 
 # Install a Jupyter kernel for easy use in notebooks
-python -m ipykernel install --user --name "$ENV_NAME" --display-name "DL-S25 (3.10)"
+python -m ipykernel install --user --name "$ENV_NAME" --display-name "DL-F25 (3.11)"
 
-# (Optional) Verify environment creation
+# Verify environment creation
 echo "Environment '$ENV_NAME' created and kernel installed."
 echo "Run 'conda activate $ENV_NAME' to start using this environment."
+echo "You can now clone the course repostitory/assignment and run your assignment!"
