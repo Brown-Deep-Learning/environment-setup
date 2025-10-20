@@ -19,7 +19,10 @@ source /oscar/runtime/software/external/miniconda3/23.11.0/etc/profile.d/conda.s
 ENV_NAME="csci1470"
 
 # Remove existing environment if it exists
-conda env remove -n "$ENV_NAME" --yes
+if conda env list | grep -q "^$ENV_NAME "; then
+    yes | conda env remove -n "$ENV_NAME" -y 2>/dev/null || true
+    echo "Removed existing environment '$ENV_NAME'"
+fi
 
 # Create the new environment from the YML file.
 # Note: Make sure you are in the correct directory so that
